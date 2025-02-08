@@ -8,4 +8,6 @@ body {
   @include tablet {
     font-size: 1.25rem;
   }
+  background-color: #e6f7e6;
+  box-sizing: border-box;
 }
