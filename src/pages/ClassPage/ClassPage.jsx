@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
+import StudentModal from '../../components/StudentModal/StudentModal';
 import classesData from '../../data/classesData.json';
 import studentsData from '../../data/studentsData.json';
 import observationsData from '../../data/observationsData.json';
@@ -9,6 +10,7 @@ import './ClassPage.scss';
 function ClassPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [selectedStudent, setSelectedStudent] = useState(null);
   
   const currentClass = classesData.classes.find(c => c.id === id);
   const classStudents = studentsData.students.filter(student => student.classId === id);
@@ -36,6 +38,14 @@ function ClassPage() {
 
   const handleBack = () => {
     navigate('/classes');
+  };
+
+  const handleStudentClick = (student) => {
+    setSelectedStudent(student);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedStudent(null);
   };
 
   return (
@@ -82,7 +92,11 @@ function ClassPage() {
             <div className="student-table__col">Observations</div>
           </div>
           {classStudents.map((student) => (
-            <div key={student.id} className="student-table__row">
+            <div 
+              key={student.id} 
+              className="student-table__row"
+              onClick={() => handleStudentClick(student)}
+            >
               <div className="student-table__col">{student.firstName} {student.lastName}</div>
               <div className="student-table__col">{student.grade}</div>
               <div className="student-table__col">{student.classGrade}%</div>
@@ -93,6 +107,11 @@ function ClassPage() {
           ))}
         </div>
       </main>
+
+      <StudentModal 
+        student={selectedStudent}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }
