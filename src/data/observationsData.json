@@ -1,0 +1,182 @@
+{
+  "observations": [
+    {
+      "id": "o1001",
+      "studentId": "s1001",
+      "classId": "c101",
+      "learningSkill": "Problem Solving",
+      "content": "Shows strong ability to break down complex problems into manageable steps",
+      "date": "2024-03-15"
+    },
+    {
+      "id": "o1002",
+      "studentId": "s1001",
+      "classId": "c101",
+      "learningSkill": "Logical Reasoning",
+      "content": "Consistently applies logical steps to reach solutions",
+      "date": "2024-03-18"
+    },
+    {
+      "id": "o1003",
+      "studentId": "s1002",
+      "classId": "c101",
+      "learningSkill": "Pattern Recognition",
+      "content": "Quickly identifies patterns in algebraic sequences",
+      "date": "2024-02-28"
+    },
+    {
+      "id": "o1004",
+      "studentId": "s1005",
+      "classId": "c101",
+      "learningSkill": "Problem Solving",
+      "content": "Needs support in developing systematic problem-solving approaches"
+    },
+    {
+      "id": "o1005",
+      "studentId": "s1005",
+      "classId": "c101",
+      "learningSkill": "Pattern Recognition",
+      "content": "Shows improvement in recognizing numerical patterns"
+    },
+    {
+      "id": "o1006",
+      "studentId": "s1005",
+      "classId": "c101",
+      "learningSkill": "Logical Reasoning",
+      "content": "Demonstrates clear thinking in step-by-step problem solving"
+    },
+    {
+      "id": "o1007",
+      "studentId": "s1008",
+      "classId": "c101",
+      "learningSkill": "Problem Solving",
+      "content": "Demonstrates methodical approach to word problems"
+    },
+    {
+      "id": "o1008",
+      "studentId": "s1010",
+      "classId": "c101",
+      "learningSkill": "Pattern Recognition",
+      "content": "Excellent at identifying sequences and relationships"
+    },
+    {
+      "id": "o1009",
+      "studentId": "s1010",
+      "classId": "c101",
+      "learningSkill": "Logical Reasoning",
+      "content": "Strong ability to construct valid arguments"
+    },
+    {
+      "id": "o1010",
+      "studentId": "s1012",
+      "classId": "c101",
+      "learningSkill": "Problem Solving",
+      "content": "Shows creativity in finding alternative solutions"
+    },
+    {
+      "id": "o1011",
+      "studentId": "s1015",
+      "classId": "c101",
+      "learningSkill": "Pattern Recognition",
+      "content": "Successfully applies pattern recognition to new problems"
+    },
+    {
+      "id": "o1012",
+      "studentId": "s1018",
+      "classId": "c101",
+      "learningSkill": "Logical Reasoning",
+      "content": "Developing stronger logical arguments"
+    },
+    {
+      "id": "o1013",
+      "studentId": "s1018",
+      "classId": "c101",
+      "learningSkill": "Problem Solving",
+      "content": "Good progress in systematic problem solving"
+    },
+    {
+      "id": "o1014",
+      "studentId": "s1020",
+      "classId": "c101",
+      "learningSkill": "Pattern Recognition",
+      "content": "Needs support in recognizing complex patterns"
+    },
+    {
+      "id": "o1015",
+      "studentId": "s1023",
+      "classId": "c101",
+      "learningSkill": "Problem Solving",
+      "content": "Shows improvement in breaking down complex problems"
+    },
+    {
+      "id": "o1016",
+      "studentId": "s1025",
+      "classId": "c101",
+      "learningSkill": "Logical Reasoning",
+      "content": "Consistently applies logical thinking to solutions"
+    },
+    {
+      "id": "o1017",
+      "studentId": "s1025",
+      "classId": "c101",
+      "learningSkill": "Pattern Recognition",
+      "content": "Quick to identify mathematical patterns"
+    },
+    {
+      "id": "o1018",
+      "studentId": "s1027",
+      "classId": "c101",
+      "learningSkill": "Problem Solving",
+      "content": "Excellent problem-solving strategies"
+    },
+    {
+      "id": "o2001",
+      "studentId": "s2001",
+      "classId": "c102",
+      "learningSkill": "Scientific Method",
+      "content": "Excellent application of scientific method in lab experiments"
+    },
+    {
+      "id": "o3001",
+      "studentId": "s3001",
+      "classId": "c103",
+      "learningSkill": "Critical Analysis",
+      "content": "Strong analysis of themes in literature"
+    },
+    {
+      "id": "o3002",
+      "studentId": "s3001",
+      "classId": "c103",
+      "learningSkill": "Written Expression",
+      "content": "Well-structured essays with clear arguments"
+    },
+    {
+      "id": "o3003",
+      "studentId": "s3001",
+      "classId": "c103",
+      "learningSkill": "Cultural Understanding",
+      "content": "Shows deep appreciation for cultural contexts in literature"
+    },
+    {
+      "id": "o4001",
+      "studentId": "s4001",
+      "classId": "c104",
+      "learningSkill": "Source Analysis",
+      "content": "Developing skills in evaluating historical sources"
+    },
+    {
+      "id": "o5001",
+      "studentId": "s5001",
+      "classId": "c105",
+      "learningSkill": "Mathematical Modeling",
+      "content": "Successfully creates mathematical models for physics problems"
+    },
+    {
+      "id": "o5002",
+      "studentId": "s5001",
+      "classId": "c105",
+      "learningSkill": "Data Interpretation",
+      "content": "Excellent analysis of experimental data and graphs"
+    }
+  ]
+} 

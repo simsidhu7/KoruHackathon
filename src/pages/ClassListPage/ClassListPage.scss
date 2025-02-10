@@ -1,0 +1,70 @@
+.class-list {
+  &__content {
+    padding: 2rem;
+  }
+
+  &__title {
+    margin-bottom: 2rem;
+  }
+
+  &__gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+}
+
+.class-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  position: relative;
+  min-height: 150px;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  &__completion {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    font-weight: bold;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    color: #333;
+    padding-right: 4rem;
+  }
+
+  &__students {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    margin-top: 1rem;
+  }
+
+  &__icon {
+    font-size: 1.1rem;
+  }
+
+  &__count {
+    font-size: 0.9rem;
+  }
+}

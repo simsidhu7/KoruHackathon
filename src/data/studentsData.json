@@ -1,0 +1,154 @@
+{
+  "students": [
+    {
+      "id": "s1001",
+      "firstName": "John",
+      "lastName": "Smith",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s1002",
+      "firstName": "Emma",
+      "lastName": "Johnson",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s1005",
+      "firstName": "Michael",
+      "lastName": "Williams",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s1008",
+      "firstName": "Sophia",
+      "lastName": "Brown",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s1010",
+      "firstName": "William",
+      "lastName": "Jones",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s1012",
+      "firstName": "Isabella",
+      "lastName": "Garcia",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s1015",
+      "firstName": "James",
+      "lastName": "Martinez",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s1018",
+      "firstName": "Olivia",
+      "lastName": "Anderson",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s1020",
+      "firstName": "Benjamin",
+      "lastName": "Taylor",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s1023",
+      "firstName": "Mia",
+      "lastName": "Thomas",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s1025",
+      "firstName": "Lucas",
+      "lastName": "Moore",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s1027",
+      "firstName": "Charlotte",
+      "lastName": "Jackson",
+      "gradeLevel": 9
+    },
+    {
+      "id": "s2001",
+      "firstName": "Ethan",
+      "lastName": "White",
+      "gradeLevel": 10
+    },
+    {
+      "id": "s2003",
+      "firstName": "Amelia",
+      "lastName": "Harris",
+      "gradeLevel": 10
+    },
+    {
+      "id": "s2005",
+      "firstName": "Alexander",
+      "lastName": "Clark",
+      "gradeLevel": 10
+    },
+    {
+      "id": "s2007",
+      "firstName": "Harper",
+      "lastName": "Lewis",
+      "gradeLevel": 10
+    },
+    {
+      "id": "s2009",
+      "firstName": "Daniel",
+      "lastName": "Lee",
+      "gradeLevel": 10
+    },
+    {
+      "id": "s3001",
+      "firstName": "Oliver",
+      "lastName": "Davis",
+      "gradeLevel": 10
+    },
+    {
+      "id": "s3003",
+      "firstName": "Evelyn",
+      "lastName": "Wilson",
+      "gradeLevel": 10
+    },
+    {
+      "id": "s3005",
+      "firstName": "Henry",
+      "lastName": "King",
+      "gradeLevel": 10
+    },
+    {
+      "id": "s5001",
+      "firstName": "Ava",
+      "lastName": "Miller",
+      "gradeLevel": 11
+    },
+    {
+      "id": "s5003",
+      "firstName": "Sebastian",
+      "lastName": "Wright",
+      "gradeLevel": 11
+    },
+    {
+      "id": "s5005",
+      "firstName": "Scarlett",
+      "lastName": "Lopez",
+      "gradeLevel": 11
+    },
+    {
+      "id": "s5007",
+      "firstName": "Jack",
+      "lastName": "Hill",
+      "gradeLevel": 11
+    },
+    {
+      "id": "s5009",
+      "firstName": "Victoria",
+      "lastName": "Scott",
+      "gradeLevel": 11
+    }
+  ]
+} 

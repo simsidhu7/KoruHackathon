@@ -1,11 +1,16 @@
 @use "./styles/partials/mixins.scss" as *;
 @use "./styles/partials/variables" as *;
 
-body {
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: Arial, Helvetica, sans-serif;
-  @include tablet {
-    font-size: 1.25rem;
-  }
+  background-color: #e6f7e6;
+  // @include tablet {
+  //   font-size: 1.25rem;
+  // }
 }

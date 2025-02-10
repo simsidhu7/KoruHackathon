@@ -1,0 +1,373 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.student-modal {
+  background: white;
+  border-radius: 8px;
+  width: 95%;
+  max-width: 1200px;
+  height: 90vh;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 1.5rem 2rem 0;
+    z-index: 10;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 2rem 2rem;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #c0c0c0;
+      border-radius: 4px;
+
+      &:hover {
+        background: #a0a0a0;
+      }
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #666;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-right: 2rem;
+  }
+
+  &__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 3rem;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 120px;
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
+  }
+
+  &__stat-label {
+    font-size: 0.875rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__stat-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  &__section {
+    margin-top: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__section-title {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  &__observations {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__observation {
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #c3e6cb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--missing {
+      border-left-color: #ffa726;
+      background-color: #fff3e0;
+    }
+  }
+
+  &__observation-content-wrapper {
+    flex: 1;
+  }
+
+  &__observation-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  &__observation-skill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #2c5a3e;
+
+    .student-modal__observation--missing & {
+      color: #e65100;
+    }
+  }
+
+  &__edit-button,
+  &__add-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin-left: 1rem;
+  }
+
+  &__edit-button {
+    color: #666;
+    font-size: 1.4rem;
+
+    &:hover {
+      background-color: #e9ecef;
+      color: #333;
+    }
+  }
+
+  &__add-button {
+    color: #e65100;
+    font-size: 1.6rem;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #ffe0b2;
+      color: #e65100;
+    }
+  }
+
+  &__observation-status {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background-color: #ffa726;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  &__observation-content {
+    color: #333;
+    line-height: 1.4;
+
+    .student-modal__observation--missing & {
+      color: #666;
+      font-style: italic;
+    }
+  }
+
+  &__empty {
+    color: #666;
+    font-style: italic;
+  }
+
+  &__general-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: none;
+    border: 2px dashed #c0c0c0;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: #666;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+
+    &:hover {
+      background-color: #f8f9fa;
+      border-color: #a0a0a0;
+      color: #333;
+    }
+
+    &-icon {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+  }
+
+  &__observation-date {
+    display: block;
+    color: #666;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+
+  &__summary-content {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    color: #333;
+    line-height: 1.6;
+    border-left: 4px solid #4a90e2;
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0 1rem;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 1px;
+  }
+
+  &__tab {
+    background: none;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: #333;
+    }
+
+    &--active {
+      color: #4a90e2;
+      border-bottom-color: #4a90e2;
+      font-weight: 500;
+    }
+  }
+
+  &__evaluation {
+    margin-top: 2rem;
+  }
+
+  &__evaluation-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: none;
+    border: 2px dashed #c0c0c0;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: #666;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #f8f9fa;
+      border-color: #a0a0a0;
+      color: #333;
+    }
+
+    &-icon {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+  }
+
+  &__evaluation-content {
+    display: none;
+  }
+
+  &__assessments {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  &__assessment {
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #4a90e2;
+  }
+
+  &__assessment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__assessment-label {
+    font-weight: 500;
+    color: #666;
+  }
+
+  &__assessment-grade {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+  }
+} 

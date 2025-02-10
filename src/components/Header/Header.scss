@@ -1,0 +1,46 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #c3e6cb;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    // padding-left: 1rem;
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+  }
+
+  &__icons {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  &__home,
+  &__classes {
+    padding: 0.5rem 0.3rem;
+    border: 2px solid #555;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 0.8rem;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+}

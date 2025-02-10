@@ -1,0 +1,186 @@
+@use '../../styles/partials/mixins.scss' as *;
+
+.class-page {
+  &__content {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+  }
+
+  &__back {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+
+    &:hover {
+      color: #333;
+    }
+  }
+
+  &__stats {
+    display: flex;
+    gap: 1.5rem 2rem;
+    justify-content: flex-start;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+
+    @include tablet {
+      flex-wrap: nowrap;
+    }
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 120px;
+    max-width: 150px;
+
+    &--skills {
+      flex: 1 1 100%;
+      min-width: 200px;
+      max-width: none;
+
+      @include tablet {
+        flex: 2 1 auto;
+        min-width: 300px;
+      }
+    }
+  }
+
+  &__stat-label {
+    font-size: 0.875rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__stat-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.4;
+
+    &--skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  }
+
+  &__skill-bubbles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__skill-bubble {
+    background-color: #e6f7e6;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    color: #2c5a3e;
+    font-weight: 500;
+  }
+}
+
+.student-table {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    font-weight: 600;
+    color: #495057;
+  }
+
+  &__row {
+    display: flex;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    cursor: pointer;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: #f8f9fa;
+    }
+  }
+
+  &__col {
+    flex: 1;
+    padding: 0 0.5rem;
+
+    &:first-child {
+      flex: 1.5; // Name column
+    }
+
+    &:last-child {
+      flex: 3; // Increased from 2 to 3 for Observations column
+    }
+
+    &--skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      background-color: #f0f0f0;
+      color: #666;
+    }
+    50% {
+      background-color: #fff3e0;
+      color: #f57c00;
+    }
+    100% {
+      background-color: #f0f0f0;
+      color: #666;
+    }
+  }
+
+  &__skill-bubble {
+    background-color: #f0f0f0;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    color: #666;
+    font-weight: normal;
+    white-space: nowrap;
+    animation: pulse 3s ease-in-out infinite;
+
+    &--observed {
+      background-color: #e6f7e6;
+      color: #2c5a3e;
+      animation: none;
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "classes": [
+    {
+      "id": "c101",
+      "name": "Mathematics",
+      "grade": 9,
+      "observationPercentage": 0.25,
+      "studentCount": 28,
+      "learningSkills": [
+        "Problem Solving",
+        "Pattern Recognition",
+        "Logical Reasoning"
+      ]
+    },
+    {
+      "id": "c102",
+      "name": "Life Sciences",
+      "grade": 10,
+      "observationPercentage": 0.016,
+      "studentCount": 32,
+      "learningSkills": [
+        "Scientific Method",
+        "Data Analysis"
+      ]
+    },
+    {
+      "id": "c103",
+      "name": "Literature",
+      "grade": 11,
+      "observationPercentage": 0.12,
+      "studentCount": 25,
+      "learningSkills": [
+        "Critical Analysis",
+        "Written Expression",
+        "Cultural Understanding"
+      ]
+    },
+    {
+      "id": "c104",
+      "name": "Social Studies",
+      "grade": 9,
+      "observationPercentage": 0.017,
+      "studentCount": 30,
+      "learningSkills": [
+        "Historical Research",
+        "Source Analysis"
+      ]
+    },
+    {
+      "id": "c105",
+      "name": "Physical Sciences",
+      "grade": 10,
+      "observationPercentage": 0.025,
+      "studentCount": 27,
+      "learningSkills": [
+        "Mathematical Modeling",
+        "Experimental Design",
+        "Data Interpretation"
+      ]
+    }
+  ]
+} 
