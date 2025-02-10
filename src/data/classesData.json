@@ -1,0 +1,67 @@
+{
+  "classes": [
+    {
+      "id": "c101",
+      "code": "MATH101",
+      "name": "Algebra Fundamentals",
+      "grade": 9,
+      "completionPercentage": 0.75,
+      "studentCount": 28,
+      "learningSkills": [
+        "Problem Solving",
+        "Pattern Recognition",
+        "Logical Reasoning"
+      ]
+    },
+    {
+      "id": "c102",
+      "code": "SCI201",
+      "name": "Biology",
+      "grade": 10,
+      "completionPercentage": 0.45,
+      "studentCount": 32,
+      "learningSkills": [
+        "Scientific Method",
+        "Data Analysis"
+      ]
+    },
+    {
+      "id": "c103",
+      "code": "ENG301",
+      "name": "World Literature",
+      "grade": 11,
+      "completionPercentage": 0.92,
+      "studentCount": 25,
+      "learningSkills": [
+        "Critical Analysis",
+        "Written Expression",
+        "Cultural Understanding"
+      ]
+    },
+    {
+      "id": "c104",
+      "code": "HIST102",
+      "name": "Ancient Civilizations",
+      "grade": 9,
+      "completionPercentage": 0.33,
+      "studentCount": 30,
+      "learningSkills": [
+        "Historical Research",
+        "Source Analysis"
+      ]
+    },
+    {
+      "id": "c105",
+      "code": "PHYS202",
+      "name": "Physics",
+      "grade": 10,
+      "completionPercentage": 0.68,
+      "studentCount": 27,
+      "learningSkills": [
+        "Mathematical Modeling",
+        "Experimental Design",
+        "Data Interpretation"
+      ]
+    }
+  ]
+} 
