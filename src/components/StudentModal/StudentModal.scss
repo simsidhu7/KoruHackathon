@@ -339,4 +339,35 @@
   &__evaluation-content {
     display: none;
   }
+
+  &__assessments {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  &__assessment {
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #4a90e2;
+  }
+
+  &__assessment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__assessment-label {
+    font-weight: 500;
+    color: #666;
+  }
+
+  &__assessment-grade {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+  }
 } 

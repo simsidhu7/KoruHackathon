@@ -54,6 +54,12 @@ function StudentModal({ student, onClose }) {
               Observations
             </button>
             <button 
+              className={`student-modal__tab ${activeTab === 'assessments' ? 'student-modal__tab--active' : ''}`}
+              onClick={() => setActiveTab('assessments')}
+            >
+              Assessments
+            </button>
+            <button 
               className={`student-modal__tab ${activeTab === 'summary' ? 'student-modal__tab--active' : ''}`}
               onClick={() => setActiveTab('summary')}
             >
@@ -109,6 +115,16 @@ function StudentModal({ student, onClose }) {
                 <button className="student-modal__general-button">
                   <span className="student-modal__general-button-icon">+</span>
                   Add an observation
+                </button>
+              </div>
+            </div>
+          ) : activeTab === 'assessments' ? (
+            <div className="student-modal__section">
+              <h3 className="student-modal__section-title">Assessments</h3>
+              <div className="student-modal__assessments">
+                <button className="student-modal__general-button">
+                  <span className="student-modal__general-button-icon">+</span>
+                  Add an assessment
                 </button>
               </div>
             </div>
