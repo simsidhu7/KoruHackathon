@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import classesData from '../../data/classesData.json';
 import studentsData from '../../data/studentsData.json';
+import observationsData from '../../data/observationsData.json';
 import './ClassPage.scss';
 
 function ClassPage() {
@@ -12,16 +13,29 @@ function ClassPage() {
   const currentClass = classesData.classes.find(c => c.id === id);
   const classStudents = studentsData.students.filter(student => student.classId === id);
 
-  const handleBack = () => {
-    navigate('/classes');
+  const hasObservation = (studentId, skill) => {
+    return observationsData.observations.some(
+      obs => obs.studentId === studentId && 
+             obs.classId === id && 
+             obs.learningSkill === skill
+    );
   };
 
-  const formatLearningSkills = (skills, className = "class-page__skill-bubble") => {
-    return skills?.map((skill, index) => (
-      <span key={index} className={className}>
-        {index + 1} - {skill}
-      </span>
-    ));
+  const formatLearningSkills = (skills, studentId = null, className = "class-page__skill-bubble") => {
+    return skills?.map((skill, index) => {
+      const isObserved = studentId ? hasObservation(studentId, skill) : false;
+      const bubbleClass = `${className} ${isObserved ? `${className}--observed` : ''}`;
+      
+      return (
+        <span key={index} className={bubbleClass}>
+          {index + 1} - {skill}
+        </span>
+      );
+    });
+  };
+
+  const handleBack = () => {
+    navigate('/classes');
   };
 
   return (
@@ -35,7 +49,7 @@ function ClassPage() {
           >
             ‹
           </span>
-          <h1>{currentClass?.code}: {currentClass?.name}</h1>
+          <h1>{currentClass?.name}</h1>
         </div>
         <div className="class-page__stats">
           <div className="class-page__stat">
@@ -49,7 +63,7 @@ function ClassPage() {
           <div className="class-page__stat">
             <span className="class-page__stat-label">Observed</span>
             <span className="class-page__stat-value">
-              {Math.round(currentClass?.completionPercentage * 100)}%
+              {Math.round(currentClass?.observationPercentage * 100)}%
             </span>
           </div>
           <div className="class-page__stat class-page__stat--skills">
@@ -73,7 +87,7 @@ function ClassPage() {
               <div className="student-table__col">{student.grade}</div>
               <div className="student-table__col">{student.classGrade}%</div>
               <div className="student-table__col student-table__col--skills">
-                {formatLearningSkills(currentClass?.learningSkills, "student-table__skill-bubble")}
+                {formatLearningSkills(currentClass?.learningSkills, student.id, "student-table__skill-bubble")}
               </div>
             </div>
           ))}

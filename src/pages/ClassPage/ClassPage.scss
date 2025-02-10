@@ -68,7 +68,7 @@
     padding: 0.4rem 0.8rem;
     border-radius: 999px;
     font-size: 1rem;
-    color: #2c5282;
+    color: #2c5a3e;
     font-weight: 600;
     white-space: nowrap;
   }
@@ -147,5 +147,11 @@
     font-weight: normal;
     white-space: nowrap;
     animation: pulse 3s ease-in-out infinite;
+
+    &--observed {
+      background-color: #e6f7e6;
+      color: #2c5a3e;
+      animation: none;
+    }
   }
 } 
