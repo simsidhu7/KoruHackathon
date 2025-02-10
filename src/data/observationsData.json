@@ -5,21 +5,24 @@
       "studentId": "s1001",
       "classId": "c101",
       "learningSkill": "Problem Solving",
-      "content": "Shows strong ability to break down complex problems into manageable steps"
+      "content": "Shows strong ability to break down complex problems into manageable steps",
+      "date": "2024-03-15"
     },
     {
       "id": "o1002",
       "studentId": "s1001",
       "classId": "c101",
       "learningSkill": "Logical Reasoning",
-      "content": "Consistently applies logical steps to reach solutions"
+      "content": "Consistently applies logical steps to reach solutions",
+      "date": "2024-03-18"
     },
     {
       "id": "o1003",
       "studentId": "s1002",
       "classId": "c101",
       "learningSkill": "Pattern Recognition",
-      "content": "Quickly identifies patterns in algebraic sequences"
+      "content": "Quickly identifies patterns in algebraic sequences",
+      "date": "2024-02-28"
     },
     {
       "id": "o1004",

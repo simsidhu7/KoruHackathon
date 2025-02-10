@@ -24,7 +24,8 @@
 
   &__stats {
     display: flex;
-    gap: 3rem;
+    flex-wrap: wrap;
+    gap: 1.5rem 3rem;
     padding: 1.5rem;
     background-color: white;
     border-radius: 8px;
@@ -37,9 +38,13 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 120px;
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
 
     &--skills {
       flex: 2;
+      max-width: none;
     }
   }
 

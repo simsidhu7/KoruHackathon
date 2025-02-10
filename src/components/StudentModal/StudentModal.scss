@@ -14,29 +14,45 @@
 .student-modal {
   background: white;
   border-radius: 8px;
-  padding: 2rem;
   width: 95%;
   max-width: 1000px;
   max-height: 90vh;
   position: relative;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
-  &::-webkit-scrollbar {
-    width: 8px;
+  &__header {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 1.5rem 2rem 0;
+    z-index: 10;
+    border-bottom: 1px solid #f0f0f0;
   }
 
-  &::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-  }
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 2rem 2rem;
 
-  &::-webkit-scrollbar-thumb {
-    background: #c0c0c0;
-    border-radius: 4px;
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
 
-    &:hover {
-      background: #a0a0a0;
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #c0c0c0;
+      border-radius: 4px;
+
+      &:hover {
+        background: #a0a0a0;
+      }
     }
   }
 
@@ -63,13 +79,14 @@
 
   &__title {
     font-size: 1.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding-right: 2rem;
   }
 
   &__stats {
     display: flex;
-    gap: 3rem;
+    flex-wrap: wrap;
+    gap: 1.5rem 3rem;
     padding: 1.5rem;
     background-color: white;
     border-radius: 8px;
@@ -81,6 +98,9 @@
     flex-direction: column;
     gap: 0.5rem;
     min-width: 120px;
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
   }
 
   &__stat-label {
@@ -113,14 +133,16 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding-right: 1rem;
   }
 
   &__observation {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     background-color: #f8f9fa;
     border-radius: 8px;
     border-left: 4px solid #c3e6cb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     &--missing {
       border-left-color: #ffa726;
@@ -128,15 +150,61 @@
     }
   }
 
+  &__observation-content-wrapper {
+    flex: 1;
+  }
+
+  &__observation-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
   &__observation-skill {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 0.5rem;
     font-weight: 600;
     color: #2c5a3e;
-    margin-bottom: 0.5rem;
 
     .student-modal__observation--missing & {
+      color: #e65100;
+    }
+  }
+
+  &__edit-button,
+  &__add-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin-left: 1rem;
+  }
+
+  &__edit-button {
+    color: #666;
+    font-size: 1.4rem;
+
+    &:hover {
+      background-color: #e9ecef;
+      color: #333;
+    }
+  }
+
+  &__add-button {
+    color: #e65100;
+    font-size: 1.6rem;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #ffe0b2;
       color: #e65100;
     }
   }
@@ -164,5 +232,39 @@
   &__empty {
     color: #666;
     font-style: italic;
+  }
+
+  &__general-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: none;
+    border: 2px dashed #c0c0c0;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: #666;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+
+    &:hover {
+      background-color: #f8f9fa;
+      border-color: #a0a0a0;
+      color: #333;
+    }
+
+    &-icon {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+  }
+
+  &__observation-date {
+    display: block;
+    color: #666;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
   }
 } 
