@@ -25,7 +25,7 @@ function StudentModal({ student, onClose , classId, learningSkills}) {
           <div className="student-modal__stats">
             <div className="student-modal__stat">
               <span className="student-modal__stat-label">Student ID</span>
-              {/* <span className="student-modal__stat-value">{student?._id}</span> */}
+              <span className="student-modal__stat-value">{student?.studentId}</span>
             </div>
             <div className="student-modal__stat">
               <span className="student-modal__stat-label">Grade Level</span>
