@@ -1,48 +1,39 @@
-import React, { useState } from 'react';
-import observationsData from '../../data/observationsData.json';
-import classesData from '../../data/classesData.json';
-import studentClassData from '../../data/studentClassData.json';
+import { useState } from 'react';
 import './StudentModal.scss';
 
-function StudentModal({ student, onClose }) {
+function StudentModal({ student, onClose , classId, learningSkills}) {
   const [activeTab, setActiveTab] = useState('observations');
 
   if (!student) return null;
+  // console.log(student.classes)
 
-  const currentClass = classesData.classes.find(c => c.id === student.classId);
-  const studentObservations = observationsData.observations.filter(
-    obs => obs.studentId === student.id
-  );
-  const evaluation = studentClassData.evaluations.find(
-    evaluation => evaluation.studentId === student.id && evaluation.classId === student.classId
-  );
-
-  const learningSkills = currentClass?.learningSkills || [];
-  const getObservationForSkill = (skill) => {
-    return studentObservations.find(obs => obs.learningSkill === skill);
-  };
+  const currentClass = student?.classes?.find(c => {
+    // console.log(c)
+    return c.classId === classId
+  });
+  // console.log(currentClass)
 
   return (
     <div className="modal-overlay">
       <div className="student-modal">
         <div className="student-modal__header">
           <button className="student-modal__close" onClick={onClose}>×</button>
-          <h2 className="student-modal__title">{student.firstName} {student.lastName}</h2>
+          <h2 className="student-modal__title">{student?.firstName} {student?.lastName}</h2>
         </div>
         
         <div className="student-modal__content">
           <div className="student-modal__stats">
             <div className="student-modal__stat">
               <span className="student-modal__stat-label">Student ID</span>
-              <span className="student-modal__stat-value">{student.id}</span>
+              {/* <span className="student-modal__stat-value">{student?._id}</span> */}
             </div>
             <div className="student-modal__stat">
               <span className="student-modal__stat-label">Grade Level</span>
-              <span className="student-modal__stat-value">{student.gradeLevel}</span>
+              <span className="student-modal__stat-value">{student?.gradeLevel}</span>
             </div>
             <div className="student-modal__stat">
               <span className="student-modal__stat-label">Class Grade</span>
-              <span className="student-modal__stat-value">{evaluation?.classGrade ?? '-'}%</span>
+              <span className="student-modal__stat-value">{currentClass?.classGrade || '-'}%</span>
             </div>
           </div>
 
@@ -71,25 +62,27 @@ function StudentModal({ student, onClose }) {
             <div className="student-modal__section">
               <h3 className="student-modal__section-title">Observations</h3>
               <div className="student-modal__observations">
-                {learningSkills.map(skill => {
-                  const observation = getObservationForSkill(skill);
+                {learningSkills?.map(skill => {
+                  const obs = currentClass?.observations?.find(
+                    (o) => o.observationId === skill._id
+                  );
                   return (
                     <div 
-                      key={skill} 
-                      className={`student-modal__observation ${!observation ? 'student-modal__observation--missing' : ''}`}
+                      key={skill._id} 
+                      className={`student-modal__observation ${!obs?.content ? 'student-modal__observation--missing' : ''}`}
                     >
                       <div className="student-modal__observation-content-wrapper">
                         <div className="student-modal__observation-header">
                           <span className="student-modal__observation-skill">
-                            {skill}
-                            {!observation && <span className="student-modal__observation-status">Missing</span>}
+                            {skill.name}
+                            {!obs.content && <span className="student-modal__observation-status">Missing</span>}
                           </span>
                         </div>
-                        {observation ? (
+                        {obs.content ? (
                           <>
-                            <p className="student-modal__observation-content">{observation.content}</p>
+                            <p className="student-modal__observation-content">{obs.content}</p>
                             <span className="student-modal__observation-date">
-                              {new Date(observation.date).toLocaleDateString('en-US', {
+                              {new Date().toLocaleDateString('en-US', {
                                 year: 'numeric',
                                 month: 'short',
                                 day: 'numeric'
@@ -100,7 +93,7 @@ function StudentModal({ student, onClose }) {
                           <p className="student-modal__observation-content">No observation recorded for this skill</p>
                         )}
                       </div>
-                      {observation ? (
+                      {obs.content ? (
                         <button className="student-modal__edit-button">
                           ✎
                         </button>
@@ -133,8 +126,8 @@ function StudentModal({ student, onClose }) {
               <div className="student-modal__summary">
                 <h3 className="student-modal__section-title">Generated Summary</h3>
                 <div className="student-modal__summary-content">
-                  {evaluation ? (
-                    evaluation.generatedSummary
+                  {currentClass?.classGrade ? (
+                    "Will be generated text"
                   ) : (
                     "No observations have been recorded yet. Add observations to generate a summary of the student's progress."
                   )}
