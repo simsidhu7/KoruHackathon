@@ -1,22 +1,34 @@
-import './HomePage.scss';
-import '../../App.scss';
-import Header from '../../components/Header/Header';
+import "./HomePage.scss";
+import "../../App.scss";
+import Header from "../../components/Header/Header";
+import bubble from "../../assets/images/bubble.jpg";
+import {useNavigate} from "react-router-dom";
 
 function HomePage() {
+  const navigate = useNavigate();
   return (
     <div className="homepage">
       <Header />
       <main className="homepage__content">
         <section className="homepage__hero">
-          <h2 className="homepage__hero-title">
-            Streamline Student Observations Effortlessly!
-          </h2>
+          <div className="homepage__hero-title-container">
+            <h2 className="homepage__hero-title">
+              Streamline Student Observations Effortlessly!
+            </h2>
+            <img
+              src={bubble}
+              alt="Thinking Bubble Graphic"
+              className="homepage__hero-image"
+            />
+          </div>
           <p className="homepage__hero-description">
             ClassClarity helps with classroom management by allowing teachers to
             seamlessly document student observations, track progress, and
             generate insightful reports - all in one easy-to-use platform.
           </p>
-          <button className="homepage__hero-button">Get Started</button>
+          <button className="homepage__hero-button"
+          onClick={()=> navigate ("/classes")}
+          >Get Started</button>
         </section>
 
         <section className="homepage__features">
