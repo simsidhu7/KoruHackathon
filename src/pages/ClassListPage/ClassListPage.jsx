@@ -12,7 +12,7 @@ function ClassListPage() {
   const fetchClasses = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}classes`
+        `${import.meta.env.VITE_BACKEND_URL}/api/classes`
       );
       // console.log(data);
       setClasses(data);

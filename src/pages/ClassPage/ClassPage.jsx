@@ -16,7 +16,7 @@ function ClassPage() {
   const fetchClassById = async (classId) => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}classes/${classId}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/classes/${classId}`
       );
 
       setCurrentClass(data.classItem);
@@ -29,7 +29,7 @@ function ClassPage() {
   const fetchStudentsByClass = async (classId) => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}students/class/${classId}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/students/class/${classId}`
       );
       // console.log(data);
       setStudenrs(data);
@@ -63,7 +63,7 @@ function ClassPage() {
 
   const handleStudentClick = async (studentId) => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}students/${studentId}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/students/${studentId}`);
       // console.log(data);
       setSelectedStudent(data)
     } catch (error) {
