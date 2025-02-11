@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './StudentModal.scss';
 
-function StudentModal({ student, onClose , classId, learningSkills}) {
+function StudentModal({ student, onClose , classId, learningSkills, assessments=[]}) {
   const [activeTab, setActiveTab] = useState('observations');
   const [expandedObservation, setExpandedObservation] = useState(null);
   const [selectedVariation, setSelectedVariation] = useState(null);
@@ -263,6 +263,19 @@ function StudentModal({ student, onClose , classId, learningSkills}) {
             <div className="student-modal__section">
               <h3 className="student-modal__section-title">Assessments</h3>
               <div className="student-modal__assessments">
+                 {/* Loop through dummy assessments and display them here */}
+          {assessments.length > 0 ? (
+            assessments.map((assessment) => (
+              <div key={assessment.assessment_id} className="assessment-item">
+                <h4>{assessment.title}</h4>
+                <p><strong>Date:</strong> {assessment.date}</p>
+                <p><strong>Score:</strong> {assessment.score}</p>
+                <p><strong>Comments:</strong> {assessment.comments}</p>
+              </div>
+            ))
+          ) : (
+            <p>No assessments available</p>
+          )}
                 <button className="student-modal__general-button">
                   <span className="student-modal__general-button-icon">+</span>
                   Add an assessment
