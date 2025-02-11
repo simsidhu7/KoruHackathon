@@ -2,10 +2,9 @@
   "classes": [
     {
       "id": "c101",
-      "code": "MATH101",
-      "name": "Algebra Fundamentals",
+      "name": "Mathematics",
       "grade": 9,
-      "completionPercentage": 0.75,
+      "observationPercentage": 0.25,
       "studentCount": 28,
       "learningSkills": [
         "Problem Solving",
@@ -15,10 +14,9 @@
     },
     {
       "id": "c102",
-      "code": "SCI201",
-      "name": "Biology",
+      "name": "Life Sciences",
       "grade": 10,
-      "completionPercentage": 0.45,
+      "observationPercentage": 0.016,
       "studentCount": 32,
       "learningSkills": [
         "Scientific Method",
@@ -27,10 +25,9 @@
     },
     {
       "id": "c103",
-      "code": "ENG301",
-      "name": "World Literature",
+      "name": "Literature",
       "grade": 11,
-      "completionPercentage": 0.92,
+      "observationPercentage": 0.12,
       "studentCount": 25,
       "learningSkills": [
         "Critical Analysis",
@@ -40,10 +37,9 @@
     },
     {
       "id": "c104",
-      "code": "HIST102",
-      "name": "Ancient Civilizations",
+      "name": "Social Studies",
       "grade": 9,
-      "completionPercentage": 0.33,
+      "observationPercentage": 0.017,
       "studentCount": 30,
       "learningSkills": [
         "Historical Research",
@@ -52,10 +48,9 @@
     },
     {
       "id": "c105",
-      "code": "PHYS202",
-      "name": "Physics",
+      "name": "Physical Sciences",
       "grade": 10,
-      "completionPercentage": 0.68,
+      "observationPercentage": 0.025,
       "studentCount": 27,
       "learningSkills": [
         "Mathematical Modeling",

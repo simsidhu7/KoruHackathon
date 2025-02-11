@@ -37,7 +37,7 @@ function ClassListPage() {
             >
               <div className="class-card__content">
                 <h2 className="class-card__title">
-                  {classItem.code}: {classItem.name}
+                  {classItem.name}
                 </h2>
                 <div className="class-card__students">
                   <span className="class-card__icon">👤</span>
@@ -47,11 +47,11 @@ function ClassListPage() {
               <div 
                 className="class-card__completion"
                 style={{ 
-                  backgroundColor: getCompletionColor(classItem.completionPercentage),
+                  backgroundColor: getCompletionColor(classItem.observationPercentage),
                   color: 'white'
                 }}
               >
-                {Math.round(classItem.completionPercentage * 100)}% Observed
+                {Math.round(classItem.observationPercentage * 100)}% Observed
               </div>
             </div>
           ))}

@@ -1,0 +1,137 @@
+{
+  "evaluations": [
+    {
+      "studentId": "s1001",
+      "classId": "c101",
+      "classGrade": 92,
+      "generatedSummary": "Demonstrates exceptional problem-solving abilities and logical thinking. Shows consistent strength in breaking down complex problems and applying systematic approaches to solutions.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s1002",
+      "classId": "c101",
+      "classGrade": 85,
+      "generatedSummary": "Shows particular strength in pattern recognition. Could benefit from additional support in developing problem-solving strategies.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s1005",
+      "classId": "c101",
+      "classGrade": 78,
+      "generatedSummary": "Making steady progress across all learning skills. While problem-solving needs development, shows good improvement in pattern recognition and logical reasoning.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s1008",
+      "classId": "c101",
+      "classGrade": 88,
+      "generatedSummary": "Demonstrates methodical approach to problem-solving, particularly with word problems. Could benefit from more practice with pattern recognition.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s1010",
+      "classId": "c101",
+      "classGrade": 95,
+      "generatedSummary": "Strong in both pattern recognition and logical reasoning. Effectively identifies relationships and constructs valid arguments.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s1012",
+      "classId": "c101",
+      "classGrade": 87,
+      "generatedSummary": "Shows creativity in finding alternative solutions. Good progress in developing problem-solving strategies.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s1015",
+      "classId": "c101",
+      "classGrade": 83,
+      "generatedSummary": "Successfully applies pattern recognition to new problems. Shows steady improvement in logical reasoning.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s1018",
+      "classId": "c101",
+      "classGrade": 84,
+      "generatedSummary": "Shows good understanding of mathematical concepts. Working on improving pattern recognition skills.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s1020",
+      "classId": "c101",
+      "classGrade": 89,
+      "generatedSummary": "Strong analytical skills and systematic approach to problem-solving.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s1023",
+      "classId": "c101",
+      "classGrade": 86,
+      "generatedSummary": "Good progress in developing mathematical reasoning skills.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s1025",
+      "classId": "c101",
+      "classGrade": 81,
+      "generatedSummary": "Showing improvement in problem-solving strategies and pattern recognition.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s1027",
+      "classId": "c101",
+      "classGrade": 90,
+      "generatedSummary": "Excellent grasp of mathematical concepts and logical thinking.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s2001",
+      "classId": "c101",
+      "classGrade": 88,
+      "generatedSummary": "Strong analytical abilities and systematic problem-solving approach.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s2003",
+      "classId": "c101",
+      "classGrade": 85,
+      "generatedSummary": "Good understanding of mathematical concepts and logical reasoning.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s2001",
+      "classId": "c102",
+      "classGrade": 89,
+      "generatedSummary": "Strong understanding of scientific concepts and experimental procedures.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s2003",
+      "classId": "c102",
+      "classGrade": 92,
+      "generatedSummary": "Excellent analytical skills in laboratory work and scientific reasoning.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s3001",
+      "classId": "c103",
+      "classGrade": 94,
+      "generatedSummary": "Excels in literary analysis with strong written expression and cultural understanding. Consistently produces well-structured work with deep insights.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s5001",
+      "classId": "c104",
+      "classGrade": 88,
+      "generatedSummary": "Strong analytical skills in historical context and source evaluation.",
+      "finalComment": ""
+    },
+    {
+      "studentId": "s5001",
+      "classId": "c105",
+      "classGrade": 91,
+      "generatedSummary": "Shows excellent capability in both mathematical modeling and data interpretation. Particularly strong in analyzing experimental results.",
+      "finalComment": ""
+    }
+  ]
+} 
