@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
-// import classesData from "../../data/classesData.json";
 import "./ClassListPage.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -8,7 +7,6 @@ import { useEffect, useState } from "react";
 function ClassListPage() {
   const navigate = useNavigate();
   const [classes, setClasses] = useState([]);
-    // const { classes } = classesData;
 
   // fetch classes list
   const fetchClasses = async () => {
@@ -48,7 +46,7 @@ function ClassListPage() {
       <main className="class-list__content">
         <h1 className="class-list__title">Classes</h1>
         <div className="class-list__gallery">
-          {classes.map(({_id, name, studentCount, classCode, completion, gradeLevel}) => (
+          {classes.map(({_id, name, studentCount, completion}) => (
             <div
               key={_id}
               className="class-card"
