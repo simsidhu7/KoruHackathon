@@ -1,36 +1,23 @@
-import React, { useState } from 'react';
-import observationsData from '../../data/observationsData.json';
-import classesData from '../../data/classesData.json';
-import studentClassData from '../../data/studentClassData.json';
+import { useState } from 'react';
 import './StudentModal.scss';
 
-function StudentModal({ student, onClose }) {
+function StudentModal({ student, onClose , classId, learningSkills}) {
   const [activeTab, setActiveTab] = useState('observations');
   const [expandedObservation, setExpandedObservation] = useState(null);
   const [selectedVariation, setSelectedVariation] = useState(null);
   const [editedContent, setEditedContent] = useState('');
 
   if (!student) return null;
+  // console.log(student.classes)
 
-  const currentClass = classesData.classes.find(
-    (c) => c.id === student.classId
-  );
-  const studentObservations = observationsData.observations.filter(
-    (obs) => obs.studentId === student.id
-  );
-  const evaluation = studentClassData.evaluations.find(
-    (evaluation) =>
-      evaluation.studentId === student.id &&
-      evaluation.classId === student.classId
-  );
+  const currentClass = student?.classes?.find(c => {
+    // console.log(c)
+    return c.classId === classId
+  });
+  // console.log(currentClass)
 
-  const learningSkills = currentClass?.learningSkills || [];
-  const getObservationForSkill = (skill) => {
-    return studentObservations.find((obs) => obs.learningSkill === skill);
-  };
-
-  const handleObservationEdit = (observation, skill) => {
-    const observationId = observation ? observation.id : `new-${skill}`;
+  const handleObservationEdit = (obs, skill) => {
+    const observationId = obs ? obs.observationId : `new-${skill._id}`;
     
     if (expandedObservation === observationId) {
       setExpandedObservation(null);
@@ -39,7 +26,7 @@ function StudentModal({ student, onClose }) {
     } else {
       setExpandedObservation(observationId);
       setSelectedVariation(null);
-      setEditedContent(observation ? observation.content : '');
+      setEditedContent(obs ? obs.content : '');
     }
   };
 
@@ -100,31 +87,23 @@ function StudentModal({ student, onClose }) {
     <div className="modal-overlay">
       <div className="student-modal">
         <div className="student-modal__header">
-          <button className="student-modal__close" onClick={onClose}>
-            ×
-          </button>
-          <h2 className="student-modal__title">
-            {student.firstName} {student.lastName}
-          </h2>
+          <button className="student-modal__close" onClick={onClose}>×</button>
+          <h2 className="student-modal__title">{student?.firstName} {student?.lastName}</h2>
         </div>
 
         <div className="student-modal__content">
           <div className="student-modal__stats">
             <div className="student-modal__stat">
               <span className="student-modal__stat-label">Student ID</span>
-              <span className="student-modal__stat-value">{student.id}</span>
+              <span className="student-modal__stat-value">{student?.studentId}</span>
             </div>
             <div className="student-modal__stat">
               <span className="student-modal__stat-label">Grade Level</span>
-              <span className="student-modal__stat-value">
-                {student.gradeLevel}
-              </span>
+              <span className="student-modal__stat-value">{student?.gradeLevel}</span>
             </div>
             <div className="student-modal__stat">
               <span className="student-modal__stat-label">Class Grade</span>
-              <span className="student-modal__stat-value">
-                {evaluation?.classGrade ?? '-'}%
-              </span>
+              <span className="student-modal__stat-value">{currentClass?.classGrade || '-'}%</span>
             </div>
           </div>
 
@@ -161,38 +140,32 @@ function StudentModal({ student, onClose }) {
                 Learning Skills Observations
               </h3>
               <div className="student-modal__observations">
-                {learningSkills.map((skill) => {
-                  const observation = getObservationForSkill(skill);
+                {learningSkills?.map(skill => {
+                  const obs = currentClass?.observations?.find(
+                    (o) => o.observationId === skill._id
+                  );
                   return (
-                    <div
-                      key={skill}
-                      className={`student-modal__observation ${
-                        !observation
-                          ? 'student-modal__observation--missing'
-                          : ''
-                      }`}
+                    <div 
+                      key={skill._id} 
+                      className={`student-modal__observation ${!obs?.content ? 'student-modal__observation--missing' : ''}`}
                     >
                       <div className="student-modal__observation-content-wrapper">
                         <div className="student-modal__observation-header">
                           <span className="student-modal__observation-skill">
-                            {skill}
-                            {!observation && (
-                              <span className="student-modal__observation-status">
-                                Missing
-                              </span>
-                            )}
+                            {skill.name}
+                            {!obs?.content && <span className="student-modal__observation-status">Missing</span>}
                           </span>
                         </div>
-                        {observation ? (
+                        {obs?.content ? (
                           <div className="student-modal__observation-expanded">
                             <div className="student-modal__observation-main">
                               <p className="student-modal__observation-content">
-                                {observation.content}
+                                {obs.content}
                               </p>
                             </div>
                             
                             <div className={`student-modal__variations ${
-                              expandedObservation === observation.id ? 'student-modal__variations--expanded' : ''
+                              expandedObservation === obs.observationId ? 'student-modal__variations--expanded' : ''
                             }`}>
                               <div className="student-modal__variations-list">
                                 {getObservationStatements(skill).map((statement, index) => (
@@ -228,7 +201,7 @@ function StudentModal({ student, onClose }) {
                             </p>
                             
                             <div className={`student-modal__variations ${
-                              expandedObservation === `new-${skill}` ? 'student-modal__variations--expanded' : ''
+                              expandedObservation === `new-${skill._id}` ? 'student-modal__variations--expanded' : ''
                             }`}>
                               <div className="student-modal__variations-list">
                                 {getObservationStatements(skill).map((statement, index) => (
@@ -259,19 +232,19 @@ function StudentModal({ student, onClose }) {
                           </div>
                         )}
                       </div>
-                      {observation ? (
+                      {obs?.content ? (
                         <button 
                           className="student-modal__edit-button"
-                          onClick={() => handleObservationEdit(observation)}
+                          onClick={() => handleObservationEdit(obs, skill)}
                         >
-                          {expandedObservation === observation.id ? '×' : '✎'}
+                          {expandedObservation === obs.observationId ? '×' : '✎'}
                         </button>
                       ) : (
                         <button 
                           className="student-modal__add-button"
                           onClick={() => handleObservationEdit(null, skill)}
                         >
-                          {expandedObservation === `new-${skill}` ? '×' : '+'}
+                          {expandedObservation === `new-${skill._id}` ? '×' : '+'}
                         </button>
                       )}
                     </div>
@@ -303,9 +276,11 @@ function StudentModal({ student, onClose }) {
                   Generated Summary
                 </h3>
                 <div className="student-modal__summary-content">
-                  {evaluation
-                    ? evaluation.generatedSummary
-                    : "No observations have been recorded yet. Add observations to generate a summary of the student's progress."}
+                  {currentClass?.classGrade ? (
+                    "Will be generated text"
+                  ) : (
+                    "No observations have been recorded yet. Add observations to generate a summary of the student's progress."
+                  )}
                 </div>
               </div>
 
