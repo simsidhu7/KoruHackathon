@@ -16,6 +16,8 @@ function StudentModal({
   const [editedContent, setEditedContent] = useState("");
   const [newSummary, setNewSummary] = useState("");
   const [isLoadingSummary, setIsLoadingSummary] = useState(false);
+  const [showFinalComment, setShowFinalComment] = useState(false);
+  const [finalComment, setFinalComment] = useState("");
 
   if (!student) return null;
   // console.log(student.classes)
@@ -396,7 +398,7 @@ function StudentModal({
                       <button
                         onClick={() => generateSummary(student._id, classId)}
                         className="student-modal__summary-button">
-                        ✨ Generate
+                        Generate ✨
                       </button>
                     </>
                   )}
@@ -407,12 +409,41 @@ function StudentModal({
                 <h3 className="student-modal__section-title">
                   Final Term Comment
                 </h3>
-                <button className="student-modal__evaluation-button">
-                  <span className="student-modal__evaluation-button-icon">
-                    +
-                  </span>
-                  Add final term comment
-                </button>
+                {showFinalComment ? (
+                  <div className="student-modal__evaluation-content">
+                    <textarea
+                      value={finalComment}
+                      onChange={(e) => setFinalComment(e.target.value)}
+                      className="student-modal__edit-textarea"
+                      rows={4}
+                      placeholder="Write your final term comment here..."
+                    />
+                    <div className="student-modal__button-group">
+                      <button className="student-modal__save-button">
+                        Save Changes
+                      </button>
+                      <button 
+                        className="student-modal__cancel-button"
+                        onClick={() => {
+                          setShowFinalComment(false);
+                          setFinalComment("");
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button 
+                    className="student-modal__evaluation-button"
+                    onClick={() => setShowFinalComment(true)}
+                  >
+                    <span className="student-modal__evaluation-button-icon">
+                      +
+                    </span>
+                    Add final term comment
+                  </button>
+                )}
               </div>
             </div>
           )}
