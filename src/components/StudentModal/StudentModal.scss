@@ -277,6 +277,21 @@
     line-height: 1.6;
     border-left: 4px solid #4a90e2;
   }
+  &__summary-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: .75rem;
+    padding: .5rem 0.75rem;
+    border: 1px solid black;
+    border-radius: .5rem;
+    background-color: #c3e6cb;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: all 250ms ease-in-out;
+    &:hover{
+      background-color: #a3d3af;
+    }
+  }
 
   &__tabs {
     display: flex;

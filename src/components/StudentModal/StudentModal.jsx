@@ -1,32 +1,62 @@
-import { useState } from 'react';
-import './StudentModal.scss';
+import { useState } from "react";
+import "./StudentModal.scss";
+import axios from "axios";
+import { HashLoader } from "react-spinners";
 
-function StudentModal({ student, onClose , classId, learningSkills, assessments=[]}) {
-  const [activeTab, setActiveTab] = useState('observations');
+function StudentModal({
+  student,
+  onClose,
+  classId,
+  learningSkills,
+  assessments = [],
+}) {
+  const [activeTab, setActiveTab] = useState("observations");
   const [expandedObservation, setExpandedObservation] = useState(null);
   const [selectedVariation, setSelectedVariation] = useState(null);
-  const [editedContent, setEditedContent] = useState('');
+  const [editedContent, setEditedContent] = useState("");
+  const [newSummary, setNewSummary] = useState("");
+  const [isLoadingSummary, setIsLoadingSummary] = useState(false);
 
   if (!student) return null;
   // console.log(student.classes)
 
-  const currentClass = student?.classes?.find(c => {
+  const currentClass = student?.classes?.find((c) => {
     // console.log(c)
-    return c.classId === classId
+    return c.classId === classId;
   });
   // console.log(currentClass)
 
+  const generateSummary = async (studentId, classId) => {
+    try {
+      setIsLoadingSummary(true);
+      const regenerate = true;
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/students/generateSummary`,
+        {
+          classId,
+          studentId,
+          regenerate,
+        }
+      );
+      console.log(res.data);
+      setNewSummary(res.data.summary);
+      setIsLoadingSummary(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleObservationEdit = (obs, skill) => {
     const observationId = obs ? obs.observationId : `new-${skill._id}`;
-    
+
     if (expandedObservation === observationId) {
       setExpandedObservation(null);
       setSelectedVariation(null);
-      setEditedContent('');
+      setEditedContent("");
     } else {
       setExpandedObservation(observationId);
       setSelectedVariation(null);
-      setEditedContent(obs ? obs.content : '');
+      setEditedContent(obs ? obs.content : "");
     }
   };
 
@@ -37,123 +67,145 @@ function StudentModal({ student, onClose , classId, learningSkills, assessments=
 
   const getObservationStatements = (skill) => {
     const statements = {
-      'Problem Solving': [
+      "Problem Solving": [
         "Outstanding - Demonstrates exceptional ability to analyze complex problems, develop innovative solutions, and explain reasoning with clarity.",
         "Strong - Shows consistent ability to break down problems effectively and apply appropriate problem-solving strategies.",
         "Developing - Can solve basic problems but needs support with more complex tasks and multi-step solutions.",
-        "Needs Support - Requires guidance to develop systematic problem-solving strategies and organize approaches."
+        "Needs Support - Requires guidance to develop systematic problem-solving strategies and organize approaches.",
       ],
-      'Pattern Recognition': [
+      "Pattern Recognition": [
         "Outstanding - Shows remarkable ability to identify complex patterns and make connections across different concepts.",
         "Strong - Effectively recognizes patterns and can apply this understanding to new situations.",
         "Developing - Identifies basic patterns but needs support with more complex relationships.",
-        "Needs Support - Requires assistance to identify and understand patterns."
+        "Needs Support - Requires assistance to identify and understand patterns.",
       ],
-      'Logical Reasoning': [
+      "Logical Reasoning": [
         "Outstanding - Demonstrates sophisticated logical thinking with clear, well-structured explanations and justifications.",
         "Strong - Shows good reasoning skills and can effectively explain thought processes.",
         "Developing - Beginning to show logical approaches but explanations need more detail.",
-        "Needs Support - Requires guidance to develop and articulate logical arguments."
+        "Needs Support - Requires guidance to develop and articulate logical arguments.",
       ],
-      'Scientific Method': [
+      "Scientific Method": [
         "Outstanding - Expertly applies scientific principles with thorough methodology and insightful analysis.",
         "Strong - Shows good understanding of scientific processes and can apply them effectively.",
         "Developing - Understands basic scientific concepts but needs support with methodology.",
-        "Needs Support - Requires assistance to understand and apply scientific processes."
+        "Needs Support - Requires assistance to understand and apply scientific processes.",
       ],
-      'Data Analysis': [
+      "Data Analysis": [
         "Outstanding - Shows exceptional ability to analyze data, draw conclusions, and make meaningful connections.",
         "Strong - Effectively interprets data and can identify significant patterns and trends.",
         "Developing - Can work with basic data but needs support with complex analysis.",
-        "Needs Support - Requires guidance to interpret and analyze data effectively."
+        "Needs Support - Requires guidance to interpret and analyze data effectively.",
       ],
-      'Written Expression': [
+      "Written Expression": [
         "Outstanding - Produces clear, well-structured writing with sophisticated vocabulary and strong organization.",
         "Strong - Communicates ideas effectively with good organization and appropriate detail.",
         "Developing - Shows basic writing skills but needs support with organization and elaboration.",
-        "Needs Support - Requires assistance to organize and express ideas clearly."
-      ]
+        "Needs Support - Requires assistance to organize and express ideas clearly.",
+      ],
     };
 
-    return statements[skill] || [
-      "Outstanding - Demonstrates exceptional mastery and understanding beyond grade level expectations.",
-      "Strong - Shows consistent competence and reliable performance in this area.",
-      "Developing - Shows basic understanding but needs support with more complex aspects.",
-      "Needs Support - Requires ongoing guidance to develop fundamental skills."
-    ];
+    return (
+      statements[skill] || [
+        "Outstanding - Demonstrates exceptional mastery and understanding beyond grade level expectations.",
+        "Strong - Shows consistent competence and reliable performance in this area.",
+        "Developing - Shows basic understanding but needs support with more complex aspects.",
+        "Needs Support - Requires ongoing guidance to develop fundamental skills.",
+      ]
+    );
+  };
+
+  const handleModalClose = () => {
+    setNewSummary("");
+    setIsLoadingSummary(false);
+    onClose(); 
   };
 
   return (
     <div className="modal-overlay">
       <div className="student-modal">
         <div className="student-modal__header">
-          <button className="student-modal__close" onClick={onClose}>×</button>
-          <h2 className="student-modal__title">{student?.firstName} {student?.lastName}</h2>
+          <button className="student-modal__close" onClick={handleModalClose}>
+            ×
+          </button>
+          <h2 className="student-modal__title">
+            {student?.firstName} {student?.lastName}
+          </h2>
         </div>
 
         <div className="student-modal__content">
           <div className="student-modal__stats">
             <div className="student-modal__stat">
               <span className="student-modal__stat-label">Student ID</span>
-              <span className="student-modal__stat-value">{student?.studentId}</span>
+              <span className="student-modal__stat-value">
+                {student?.studentId}
+              </span>
             </div>
             <div className="student-modal__stat">
               <span className="student-modal__stat-label">Grade Level</span>
-              <span className="student-modal__stat-value">{student?.gradeLevel}</span>
+              <span className="student-modal__stat-value">
+                {student?.gradeLevel}
+              </span>
             </div>
             <div className="student-modal__stat">
               <span className="student-modal__stat-label">Class Grade</span>
-              <span className="student-modal__stat-value">{currentClass?.classGrade || '-'}%</span>
+              <span className="student-modal__stat-value">
+                {currentClass?.classGrade || "-"}%
+              </span>
             </div>
           </div>
 
           <div className="student-modal__tabs">
             <button
               className={`student-modal__tab ${
-                activeTab === 'observations' ? 'student-modal__tab--active' : ''
+                activeTab === "observations" ? "student-modal__tab--active" : ""
               }`}
-              onClick={() => setActiveTab('observations')}
-            >
+              onClick={() => setActiveTab("observations")}>
               Observations
             </button>
             <button
               className={`student-modal__tab ${
-                activeTab === 'assessments' ? 'student-modal__tab--active' : ''
+                activeTab === "assessments" ? "student-modal__tab--active" : ""
               }`}
-              onClick={() => setActiveTab('assessments')}
-            >
+              onClick={() => setActiveTab("assessments")}>
               Assessments
             </button>
             <button
               className={`student-modal__tab ${
-                activeTab === 'summary' ? 'student-modal__tab--active' : ''
+                activeTab === "summary" ? "student-modal__tab--active" : ""
               }`}
-              onClick={() => setActiveTab('summary')}
-            >
+              onClick={() => setActiveTab("summary")}>
               Summary & Final Comment
             </button>
           </div>
 
-          {activeTab === 'observations' ? (
+          {activeTab === "observations" ? (
             <div className="student-modal__section">
               <h3 className="student-modal__section-title">
                 Learning Skills Observations
               </h3>
               <div className="student-modal__observations">
-                {learningSkills?.map(skill => {
+                {learningSkills?.map((skill) => {
                   const obs = currentClass?.observations?.find(
                     (o) => o.observationId === skill._id
                   );
                   return (
-                    <div 
-                      key={skill._id} 
-                      className={`student-modal__observation ${!obs?.content ? 'student-modal__observation--missing' : ''}`}
-                    >
+                    <div
+                      key={skill._id}
+                      className={`student-modal__observation ${
+                        !obs?.content
+                          ? "student-modal__observation--missing"
+                          : ""
+                      }`}>
                       <div className="student-modal__observation-content-wrapper">
                         <div className="student-modal__observation-header">
                           <span className="student-modal__observation-skill">
                             {skill.name}
-                            {!obs?.content && <span className="student-modal__observation-status">Missing</span>}
+                            {!obs?.content && (
+                              <span className="student-modal__observation-status">
+                                Missing
+                              </span>
+                            )}
                           </span>
                         </div>
                         {obs?.content ? (
@@ -163,27 +215,37 @@ function StudentModal({ student, onClose , classId, learningSkills, assessments=
                                 {obs.content}
                               </p>
                             </div>
-                            
-                            <div className={`student-modal__variations ${
-                              expandedObservation === obs.observationId ? 'student-modal__variations--expanded' : ''
-                            }`}>
+
+                            <div
+                              className={`student-modal__variations ${
+                                expandedObservation === obs.observationId
+                                  ? "student-modal__variations--expanded"
+                                  : ""
+                              }`}>
                               <div className="student-modal__variations-list">
-                                {getObservationStatements(skill).map((statement, index) => (
-                                  <button
-                                    key={index}
-                                    className={`student-modal__variation ${
-                                      selectedVariation === statement ? 'student-modal__variation--selected' : ''
-                                    }`}
-                                    onClick={() => handleVariationSelect(statement)}
-                                  >
-                                    {statement}
-                                  </button>
-                                ))}
+                                {getObservationStatements(skill).map(
+                                  (statement, index) => (
+                                    <button
+                                      key={index}
+                                      className={`student-modal__variation ${
+                                        selectedVariation === statement
+                                          ? "student-modal__variation--selected"
+                                          : ""
+                                      }`}
+                                      onClick={() =>
+                                        handleVariationSelect(statement)
+                                      }>
+                                      {statement}
+                                    </button>
+                                  )
+                                )}
                               </div>
                               <div className="student-modal__edit-field">
                                 <textarea
                                   value={editedContent}
-                                  onChange={(e) => setEditedContent(e.target.value)}
+                                  onChange={(e) =>
+                                    setEditedContent(e.target.value)
+                                  }
                                   className="student-modal__edit-textarea"
                                   rows={3}
                                   placeholder="Click on a statement to edit the observation here, or write a custom observation here"
@@ -199,27 +261,37 @@ function StudentModal({ student, onClose , classId, learningSkills, assessments=
                             <p className="student-modal__observation-content">
                               No observation recorded for this skill
                             </p>
-                            
-                            <div className={`student-modal__variations ${
-                              expandedObservation === `new-${skill._id}` ? 'student-modal__variations--expanded' : ''
-                            }`}>
+
+                            <div
+                              className={`student-modal__variations ${
+                                expandedObservation === `new-${skill._id}`
+                                  ? "student-modal__variations--expanded"
+                                  : ""
+                              }`}>
                               <div className="student-modal__variations-list">
-                                {getObservationStatements(skill).map((statement, index) => (
-                                  <button
-                                    key={index}
-                                    className={`student-modal__variation ${
-                                      selectedVariation === statement ? 'student-modal__variation--selected' : ''
-                                    }`}
-                                    onClick={() => handleVariationSelect(statement)}
-                                  >
-                                    {statement}
-                                  </button>
-                                ))}
+                                {getObservationStatements(skill).map(
+                                  (statement, index) => (
+                                    <button
+                                      key={index}
+                                      className={`student-modal__variation ${
+                                        selectedVariation === statement
+                                          ? "student-modal__variation--selected"
+                                          : ""
+                                      }`}
+                                      onClick={() =>
+                                        handleVariationSelect(statement)
+                                      }>
+                                      {statement}
+                                    </button>
+                                  )
+                                )}
                               </div>
                               <div className="student-modal__edit-field">
                                 <textarea
                                   value={editedContent}
-                                  onChange={(e) => setEditedContent(e.target.value)}
+                                  onChange={(e) =>
+                                    setEditedContent(e.target.value)
+                                  }
                                   className="student-modal__edit-textarea"
                                   rows={3}
                                   placeholder="Click on a statement to edit the observation here, or write a custom observation here..."
@@ -233,18 +305,20 @@ function StudentModal({ student, onClose , classId, learningSkills, assessments=
                         )}
                       </div>
                       {obs?.content ? (
-                        <button 
+                        <button
                           className="student-modal__edit-button"
-                          onClick={() => handleObservationEdit(obs, skill)}
-                        >
-                          {expandedObservation === obs.observationId ? '×' : '✎'}
+                          onClick={() => handleObservationEdit(obs, skill)}>
+                          {expandedObservation === obs.observationId
+                            ? "×"
+                            : "✎"}
                         </button>
                       ) : (
-                        <button 
+                        <button
                           className="student-modal__add-button"
-                          onClick={() => handleObservationEdit(null, skill)}
-                        >
-                          {expandedObservation === `new-${skill._id}` ? '×' : '+'}
+                          onClick={() => handleObservationEdit(null, skill)}>
+                          {expandedObservation === `new-${skill._id}`
+                            ? "×"
+                            : "+"}
                         </button>
                       )}
                     </div>
@@ -259,23 +333,31 @@ function StudentModal({ student, onClose , classId, learningSkills, assessments=
                 Add an observation
               </button>
             </div>
-          ) : activeTab === 'assessments' ? (
+          ) : activeTab === "assessments" ? (
             <div className="student-modal__section">
               <h3 className="student-modal__section-title">Assessments</h3>
               <div className="student-modal__assessments">
-                 {/* Loop through dummy assessments and display them here */}
-          {assessments.length > 0 ? (
-            assessments.map((assessment) => (
-              <div key={assessment.assessment_id} className="assessment-item">
-                <h4>{assessment.title}</h4>
-                <p><strong>Date:</strong> {assessment.date}</p>
-                <p><strong>Score:</strong> {assessment.score}</p>
-                <p><strong>Comments:</strong> {assessment.comments}</p>
-              </div>
-            ))
-          ) : (
-            <p>No assessments available</p>
-          )}
+                {/* Loop through dummy assessments and display them here */}
+                {assessments.length > 0 ? (
+                  assessments.map((assessment) => (
+                    <div
+                      key={assessment.assessment_id}
+                      className="assessment-item">
+                      <h4>{assessment.title}</h4>
+                      <p>
+                        <strong>Date:</strong> {assessment.date}
+                      </p>
+                      <p>
+                        <strong>Score:</strong> {assessment.score}
+                      </p>
+                      <p>
+                        <strong>Comments:</strong> {assessment.comments}
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No assessments available</p>
+                )}
                 <button className="student-modal__general-button">
                   <span className="student-modal__general-button-icon">+</span>
                   Add an assessment
@@ -289,10 +371,27 @@ function StudentModal({ student, onClose , classId, learningSkills, assessments=
                   Generated Summary
                 </h3>
                 <div className="student-modal__summary-content">
-                  {currentClass?.classGrade ? (
-                    "Will be generated text"
+                  {isLoadingSummary ? (
+                    <HashLoader color="#4a90e2"/>
                   ) : (
-                    "No observations have been recorded yet. Add observations to generate a summary of the student's progress."
+                    <>
+                      {currentClass?.generatedSummary && !newSummary ? (
+                        currentClass.generatedSummary
+                      ) : newSummary ? (
+                        newSummary
+                      ) : (
+                        <p>
+                          No observations have been recorded yet. Add
+                          observations to generate a summary of the student's
+                          progress.
+                        </p>
+                      )}
+                      <button
+                        onClick={() => generateSummary(student._id, classId)}
+                        className="student-modal__summary-button">
+                        ✨ Generate
+                      </button>
+                    </>
                   )}
                 </div>
               </div>
