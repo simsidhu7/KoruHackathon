@@ -244,6 +244,8 @@ function ClassPage() {
         learningSkills={currentClass?.learningSkills}
         assessments={selectedStudent?.assessments || []}
         onClose={() => setSelectedStudent(null)}
+        updateStudentInfo={handleStudentClick}
+        updateStudentsList={fetchStudentsByClass}
       />
     </div>
   );
