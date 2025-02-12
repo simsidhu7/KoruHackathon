@@ -4,6 +4,7 @@ import Header from "../../components/Header/Header";
 import StudentModal from "../../components/StudentModal/StudentModal";
 import "./ClassPage.scss";
 import axios from "axios";
+import { HashLoader } from "react-spinners";
 
 function ClassPage() {
   const { id } = useParams();
@@ -43,15 +44,18 @@ function ClassPage() {
   ];
   const [currentClass, setCurrentClass] = useState({});
   const [students, setStudenrs] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // fetch class by ID
   const fetchClassById = async (classId) => {
     try {
+      setIsLoading(true)
       const { data } = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/api/classes/${classId}`
       );
 
       setCurrentClass(data.classItem);
+      setIsLoading(false)
     } catch (error) {
       console.error(error);
     }
@@ -71,8 +75,10 @@ function ClassPage() {
   };
 
   useEffect(() => {
+    
     fetchClassById(id);
     fetchStudentsByClass(id);
+    
   }, [id]);
 
   // Calculate observation percentage
@@ -120,8 +126,7 @@ function ClassPage() {
           key={skill._id}
           className={`${className} ${
             obs?.content ? `${className}--observed` : ""
-          }`}
-        >
+          }`}>
           {index + 1}: {skill.name}
         </span>
       );
@@ -133,109 +138,121 @@ function ClassPage() {
       <Header />
       <main>
         <div className="class-page__content">
-          <div className="class-page__header">
-            <span className="class-page__back" onClick={handleBackClick}>
-              ‹
-            </span>
-            <h1>{currentClass?.name}</h1>
-          </div>
-          {currentClass && (
-            <div className="class-page__stats">
-              <div className="class-page__stat">
-                <span className="class-page__stat-label">Grade Level</span>
-                <span className="class-page__stat-value">
-                  {currentClass?.gradeLevel}
+          {isLoading ? (
+            <div className="spinner">
+              <HashLoader color="#ffa726" size={120} />
+              <p>Just a moment, content is loading.</p>
+            </div>
+          ) : (
+            <>
+              <div className="class-page__header">
+                <span className="class-page__back" onClick={handleBackClick}>
+                  ‹
                 </span>
+                <h1>{currentClass?.name}</h1>
               </div>
-              <div className="class-page__stat">
-                <span className="class-page__stat-label">Students</span>
-                <span className="class-page__stat-value">
-                  {students?.length}
-                </span>
-              </div>
-              <div className="class-page__stat">
-                <span className="class-page__stat-label">Average</span>
-                <span className="class-page__stat-value">
-                  {Math.round(
-                    students?.reduce(
-                      (sum, student) => sum + student.classGrade,
-                      0
-                    ) / students?.length
-                  )}
-                  %
-                </span>
-              </div>
-              <div className="class-page__stat">
-                <span className="class-page__stat-label">Observations</span>
-                <span className="class-page__stat-value">
-                  {calcFilledObservations(
-                    currentClass?.learningSkills?.length,
-                    students
-                  )}
-                  %
-                </span>
-              </div>
-              <div className="class-page__stat class-page__stat--skills">
-                <span className="class-page__stat-label">Learning Skills</span>
-                <div className="class-page__stat-value class-page__stat-value--skills">
-                  {currentClass?.learningSkills?.map((skill) => (
-                    <span key={skill._id} className="class-page__skill-bubble">
-                      {skill.name}
+              {currentClass && (
+                <div className="class-page__stats">
+                  <div className="class-page__stat">
+                    <span className="class-page__stat-label">Grade Level</span>
+                    <span className="class-page__stat-value">
+                      {currentClass?.gradeLevel}
                     </span>
-                  ))}
+                  </div>
+                  <div className="class-page__stat">
+                    <span className="class-page__stat-label">Students</span>
+                    <span className="class-page__stat-value">
+                      {students?.length}
+                    </span>
+                  </div>
+                  <div className="class-page__stat">
+                    <span className="class-page__stat-label">Average</span>
+                    <span className="class-page__stat-value">
+                      {Math.round(
+                        students?.reduce(
+                          (sum, student) => sum + student.classGrade,
+                          0
+                        ) / students?.length
+                      )}
+                      %
+                    </span>
+                  </div>
+                  <div className="class-page__stat">
+                    <span className="class-page__stat-label">Observations</span>
+                    <span className="class-page__stat-value">
+                      {calcFilledObservations(
+                        currentClass?.learningSkills?.length,
+                        students
+                      )}
+                      %
+                    </span>
+                  </div>
+                  <div className="class-page__stat class-page__stat--skills">
+                    <span className="class-page__stat-label">
+                      Learning Skills
+                    </span>
+                    <div className="class-page__stat-value class-page__stat-value--skills">
+                      {currentClass?.learningSkills?.map((skill) => (
+                        <span
+                          key={skill._id}
+                          className="class-page__skill-bubble">
+                          {skill.name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          )}
+              )}
 
-          <div className="student-table">
-            <div className="student-table__header">
-              <div className="student-table__col student-table__col--name">
-                Name
-              </div>
-              <div className="student-table__col student-table__col--grade-level">
-                Grade Level
-              </div>
-              <div className="student-table__col student-table__col--grade">
-                Grade
-              </div>
-              <div className="student-table__col student-table__col--skills">
-                Observations
-              </div>
-            </div>
-            {students?.map(
-              ({
-                _id,
-                firstName,
-                lastName,
-                gradeLevel,
-                classGrade,
-                learningSkills,
-              }) => (
-                <div
-                  key={_id}
-                  className="student-table__row"
-                  onClick={() => handleStudentClick(_id)}
-                >
+              <div className="student-table">
+                <div className="student-table__header">
                   <div className="student-table__col student-table__col--name">
-                    {firstName} {lastName}
+                    Name
                   </div>
                   <div className="student-table__col student-table__col--grade-level">
-                    {gradeLevel}
+                    Grade Level
                   </div>
                   <div className="student-table__col student-table__col--grade">
-                    {classGrade}%
+                    Grade
                   </div>
                   <div className="student-table__col student-table__col--skills">
-                    {formatLearningSkills(
-                      learningSkills,
-                      "student-table__skill-bubble"
-                    )}
+                    Observations
                   </div>
                 </div>
-              )
-            )}
-          </div>
+                {students?.map(
+                  ({
+                    _id,
+                    firstName,
+                    lastName,
+                    gradeLevel,
+                    classGrade,
+                    learningSkills,
+                  }) => (
+                    <div
+                      key={_id}
+                      className="student-table__row"
+                      onClick={() => handleStudentClick(_id)}>
+                      <div className="student-table__col student-table__col--name">
+                        {firstName} {lastName}
+                      </div>
+                      <div className="student-table__col student-table__col--grade-level">
+                        {gradeLevel}
+                      </div>
+                      <div className="student-table__col student-table__col--grade">
+                        {classGrade}%
+                      </div>
+                      <div className="student-table__col student-table__col--skills">
+                        {formatLearningSkills(
+                          learningSkills,
+                          "student-table__skill-bubble"
+                        )}
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+            </>
+          )}
         </div>
       </main>
       <StudentModal
