@@ -9,6 +9,8 @@ function StudentModal({
   classId,
   learningSkills,
   assessments = [],
+  updateStudentInfo,
+  updateStudentsList
 }) {
   const [activeTab, setActiveTab] = useState("observations");
   const [expandedObservation, setExpandedObservation] = useState(null);
@@ -18,6 +20,7 @@ function StudentModal({
   const [isLoadingSummary, setIsLoadingSummary] = useState(false);
   const [showFinalComment, setShowFinalComment] = useState(false);
   const [finalComment, setFinalComment] = useState("");
+  const [isUpdating, setIsUpdating] = useState(null);
 
   if (!student) return null;
   // console.log(student.classes)
@@ -45,6 +48,29 @@ function StudentModal({
       setIsLoadingSummary(false);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const updateObservation = async (obs, obsId) => {
+    try {
+      setIsUpdating(obsId);
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/students/${
+          student._id
+        }/class/${classId}/update`,
+        {
+          observation: obs,
+          obsId,
+        }
+      );
+
+      updateStudentInfo(student._id);
+      setIsUpdating(null);
+      setEditedContent("");
+      setSelectedVariation(null);
+      setExpandedObservation(null);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -120,7 +146,8 @@ function StudentModal({
   const handleModalClose = () => {
     setNewSummary("");
     setIsLoadingSummary(false);
-    onClose(); 
+    updateStudentsList(classId)
+    onClose();
   };
 
   return (
@@ -214,7 +241,11 @@ function StudentModal({
                           <div className="student-modal__observation-expanded">
                             <div className="student-modal__observation-main">
                               <p className="student-modal__observation-content">
-                                {obs.content}
+                                {isUpdating === obs.observationId ? (
+                                  <HashLoader color="#4a90e2" size={30} />
+                                ) : (
+                                  obs.content
+                                )}
                               </p>
                             </div>
 
@@ -252,7 +283,14 @@ function StudentModal({
                                   rows={3}
                                   placeholder="Click on a statement to edit the observation here, or write a custom observation here"
                                 />
-                                <button className="student-modal__save-button">
+                                <button
+                                  className="student-modal__save-button"
+                                  onClick={() =>
+                                    updateObservation(
+                                      editedContent,
+                                      obs.observationId
+                                    )
+                                  }>
                                   Save Changes
                                 </button>
                               </div>
@@ -261,7 +299,11 @@ function StudentModal({
                         ) : (
                           <div className="student-modal__observation-expanded">
                             <p className="student-modal__observation-content">
-                              No observation recorded for this skill
+                              {isUpdating === obs.observationId ? (
+                                <HashLoader color="#4a90e2" size={30} />
+                              ) : (
+                                "No observation recorded for this skill"
+                              )}
                             </p>
 
                             <div
@@ -298,7 +340,14 @@ function StudentModal({
                                   rows={3}
                                   placeholder="Click on a statement to edit the observation here, or write a custom observation here..."
                                 />
-                                <button className="student-modal__save-button">
+                                <button
+                                  className="student-modal__save-button"
+                                  onClick={() =>
+                                    updateObservation(
+                                      editedContent,
+                                      obs.observationId
+                                    )
+                                  }>
                                   Save Changes
                                 </button>
                               </div>
@@ -346,22 +395,26 @@ function StudentModal({
                       <strong>Score:</strong> {currentClass?.classGrade || "-"}%
                     </p>
                   </div>
-                  <button className="student-modal__edit-button">
-                    ✎
-                  </button>
+                  <button className="student-modal__edit-button">✎</button>
                 </div>
                 {assessments.length > 0 ? (
                   assessments.map((assessment) => (
-                    <div key={assessment.assessment_id} className="student-modal__assessment">
+                    <div
+                      key={assessment.assessment_id}
+                      className="student-modal__assessment">
                       <div className="student-modal__assessment-content">
                         <h4>{assessment.title}</h4>
-                        <p><strong>Date:</strong> {assessment.date}</p>
-                        <p><strong>Score:</strong> {assessment.score}</p>
-                        <p><strong>Comments:</strong> {assessment.comments}</p>
+                        <p>
+                          <strong>Date:</strong> {assessment.date}
+                        </p>
+                        <p>
+                          <strong>Score:</strong> {assessment.score}
+                        </p>
+                        <p>
+                          <strong>Comments:</strong> {assessment.comments}
+                        </p>
                       </div>
-                      <button className="student-modal__edit-button">
-                        ✎
-                      </button>
+                      <button className="student-modal__edit-button">✎</button>
                     </div>
                   ))
                 ) : (
@@ -381,7 +434,7 @@ function StudentModal({
                 </h3>
                 <div className="student-modal__summary-content">
                   {isLoadingSummary ? (
-                    <HashLoader color="#4a90e2"/>
+                    <HashLoader color="#4a90e2" />
                   ) : (
                     <>
                       {currentClass?.generatedSummary && !newSummary ? (
@@ -422,22 +475,20 @@ function StudentModal({
                       <button className="student-modal__save-button">
                         Save Changes
                       </button>
-                      <button 
+                      <button
                         className="student-modal__cancel-button"
                         onClick={() => {
                           setShowFinalComment(false);
                           setFinalComment("");
-                        }}
-                      >
+                        }}>
                         Cancel
                       </button>
                     </div>
                   </div>
                 ) : (
-                  <button 
+                  <button
                     className="student-modal__evaluation-button"
-                    onClick={() => setShowFinalComment(true)}
-                  >
+                    onClick={() => setShowFinalComment(true)}>
                     <span className="student-modal__evaluation-button-icon">
                       +
                     </span>
