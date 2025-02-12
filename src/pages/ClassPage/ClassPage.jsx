@@ -25,21 +25,21 @@ function ClassPage() {
       score: "90%",
       comments: "Excellent work on angles and shapes. Keep up the effort!",
     },
-    {
-      assessment_id: "A1003",
-      title: "Science Lab Report",
-      date: "2025-01-29",
-      score: "88%",
-      comments:
-        "Good analysis and hypothesis. Try to improve clarity in the conclusion section.",
-    },
-    {
-      assessment_id: "A1004",
-      title: "History Essay",
-      date: "2025-02-05",
-      score: "82%",
-      comments: "Well-researched and structured. Could enhance argument depth.",
-    },
+    // {
+    //   assessment_id: "A1003",
+    //   title: "Science Lab Report",
+    //   date: "2025-01-29",
+    //   score: "88%",
+    //   comments:
+    //     "Good analysis and hypothesis. Try to improve clarity in the conclusion section.",
+    // },
+    // {
+    //   assessment_id: "A1004",
+    //   title: "History Essay",
+    //   date: "2025-02-05",
+    //   score: "82%",
+    //   comments: "Well-researched and structured. Could enhance argument depth.",
+    // },
   ];
   const [currentClass, setCurrentClass] = useState({});
   const [students, setStudenrs] = useState(null);
