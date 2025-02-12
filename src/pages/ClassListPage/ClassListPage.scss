@@ -1,10 +1,13 @@
 .class-list {
   &__content {
     padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   &__title {
     margin-bottom: 2rem;
+    font-size: 2rem;
   }
 
   &__gallery {
